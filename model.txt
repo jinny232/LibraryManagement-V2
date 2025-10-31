@@ -1,0 +1,246 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Auth\Authenticatable;
+
+class Admin extends Model implements AuthenticatableContract
+{
+    use HasFactory, Authenticatable;
+
+    // Set the primary key
+    protected $primaryKey = 'admin_id';
+
+    // The attributes that are mass assignable.
+    protected $fillable = [
+        'email',
+        'phone_no',
+        'address',
+        'password',
+    ];
+
+    // The attributes that should be hidden for serialization.
+    protected $hidden = [
+        'password',
+    ];
+}
+<?php
+
+namespace App\Models;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Model;
+
+class Book extends Model
+{
+   protected $fillable = [
+    'title', 'author',  'isbn', 'total_copies', 'available_copies','shelf_id',
+        'category_id','barcode','image'
+];
+
+     public function index()
+    {
+        $books = Book::all();
+        return view('admin.books.index', compact('books'));
+    }
+    public function borrowings()
+{
+    return $this->hasMany(Borrowing::class, 'book_id');
+}
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Get the shelf that owns the book.
+     */
+    public function shelf(): BelongsTo
+    {
+        return $this->belongsTo(Shelf::class);
+    }
+}
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class BookRequest extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'book_id',
+        'requester_name',
+        'requester_email',
+        'requester_phone',
+    ];
+}
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Borrowing extends Model
+{
+    protected $primaryKey = 'borrow_id';
+
+    protected $fillable = [
+        'member_id',
+        'book_id',
+        'borrow_date',
+        'due_date',
+        'return_date',
+        'status',
+        'renewal_count' // New field added here
+    ];
+
+    public function getRouteKeyName()
+    {
+        return 'borrow_id';
+    }
+
+    protected $casts = [
+        'borrow_date' => 'datetime',
+        'due_date' => 'datetime',
+        'return_date' => 'datetime',
+    ];
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_id', 'member_id');
+    }
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
+}
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Category extends Model
+{
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+    ];
+
+    /**
+     * Get the books for the category.
+     */
+    public function books(): HasMany
+    {
+        return $this->hasMany(Book::class);
+    }
+}
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Member extends Model
+{
+    // Override the default primary key name 'id'
+    protected $primaryKey = 'member_id';
+
+    protected $fillable = [
+        'name',
+        'email',
+        'phone_number',
+        'roll_no',
+        'year',
+        'major',
+        'gender',
+        'registration_date',
+        'qr_code',
+        'expired_at',
+        'image',
+    ];
+
+    public function borrowings()
+    {
+        return $this->hasMany(Borrowing::class, 'member_id');
+    }
+    public function getRouteKeyName()
+{
+    return 'roll_no';
+}
+}
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Reservation extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'book_id',
+        'member_id',
+        'status',
+        'reservation_date',
+        'expiration_date',
+    ];
+
+    /**
+     * Get the book associated with the reservation.
+     */
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
+
+    /**
+     * Get the member associated with the reservation.
+     */
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_id', 'member_id');
+    }
+}
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Shelf extends Model
+{
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'shelf_number',
+        'row_number',
+        'sub_col_number',
+    ];
+
+    /**
+     * Get the books for the shelf.
+     */
+    public function books(): HasMany
+    {
+        return $this->hasMany(Book::class);
+    }
+}

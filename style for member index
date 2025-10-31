@@ -1,0 +1,390 @@
+<style>
+    /* Import a clean, modern font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    body {
+        background-color: #f8f9fa;
+        /* A light, modern off-white background */
+        color: #212529;
+        /* Dark text for readability */
+        font-family: 'Inter', sans-serif;
+        /* Clean, modern sans-serif font */
+    }
+
+    /* Modern Container with more rounded corners */
+    .modern-container {
+        background: #ffffff;
+        /* Clean white background */
+        border: 1px solid #e9ecef;
+        border-radius: 25px;
+        /* Increased for a more rounded look */
+        padding: 2.5rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        /* Soft, subtle shadow */
+    }
+
+    /* Header with Gradient Line */
+    .modern-header h2 {
+        color: #343a40;
+        /* Dark heading color */
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .modern-gradient-line {
+        height: 3px;
+        width: 100%;
+        /* A stylish blue to purple gradient */
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+        border-radius: 2px;
+    }
+
+    /* Buttons */
+    .modern-btn {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        padding: 9px 10px;
+        text-transform: capitalize;
+        /* Main button with a vibrant gradient background */
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+        color: #ffffff;
+        border: none;
+        box-shadow: 0 4px 10px rgba(106, 17, 203, 0.2);
+    }
+
+    .modern-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(106, 17, 203, 0.3);
+    }
+
+    /* Details button with a gradient border and rounded shape */
+    .modern-btn-details {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        padding: 8px 16px;
+        text-transform: capitalize;
+        background: #06b4f4;
+        color: #ffffff;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        margin-right: 5px;
+    }
+
+    .modern-btn-details:hover {
+        background: #0047e0;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* New style for the Edit button */
+    .modern-btn-edit {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        padding: 8px 16px;
+        text-transform: capitalize;
+        background: #ffc107;
+        /* A bright, modern yellow */
+        color: #ffffff;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        margin-right: 5px;
+    }
+
+    .modern-btn-edit:hover {
+        background: #e0a800;
+        /* A slightly darker yellow on hover */
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* New style for the Delete button */
+    .modern-btn-delete {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        padding: 8px 16px;
+        text-transform: capitalize;
+        background: #dc3545;
+        /* A vibrant red for deletion */
+        color: #ffffff;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .modern-btn-delete:hover {
+        background: #c82333;
+        /* A slightly darker red on hover */
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+
+    /* Table styling with more rounded corners */
+    .modern-table-wrapper {
+        overflow-x: auto;
+        /* This enables horizontal scrolling for the table */
+    }
+
+    /* New styles to hide the scrollbar */
+    /* For Webkit browsers (Chrome, Safari, Edge) */
+    .modern-table-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* For Firefox */
+    .modern-table-wrapper {
+        scrollbar-width: none;
+    }
+
+    .modern-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #ffffff;
+        border: 1px solid #e9ecef;
+        border-radius: 20px;
+        /* Increased for a more rounded look */
+        color: #495057;
+    }
+
+    .modern-table thead {
+        background-color: #f1f3f5;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .modern-table th,
+    .modern-table td {
+        padding: 15px;
+        border: 1px solid #e9ecef;
+        text-align: left;
+        /* This rule prevents the text from wrapping */
+        white-space: nowrap;
+    }
+
+    .modern-table th {
+        color: #495057;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+    }
+
+    .modern-table tbody tr {
+        transition: background-color 0.3s ease;
+    }
+
+    .modern-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    /* Alerts */
+    .modern-alert {
+        background-color: #e9f5ff;
+        color: #0d6efd;
+        border: 1px solid #b3d7ff;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Added style for expired members to make them stand out */
+    .text-danger {
+        color: #dc3545 !important;
+        font-weight: 600;
+    }
+
+    /* Icon styling for a 3D effect */
+    .icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+        position: relative;
+        transform: translateY(-2px);
+        /* Align with text baseline */
+    }
+
+    .icon-shadow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        transform: scale(0.9) translate(2px, 2px);
+        z-index: 0;
+        filter: blur(1px);
+    }
+
+    .icon-main {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Pagination Links */
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    /* New style for the fade-out effect */
+    .fade-out {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    /* NEW STYLES FOR SEARCH, FILTER, AND SORT */
+    .filter-bar {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .filter-bar form {
+        display: flex;
+        gap: 1rem;
+        flex-grow: 1;
+        flex-wrap: wrap;
+    }
+
+    .search-input {
+        flex-grow: 1;
+        min-width: 200px;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: #6a11cb;
+        box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.25);
+    }
+
+    .filter-select {
+        padding: 0.75rem 1rem;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+        background-color: #fff;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .filter-select:focus {
+        outline: none;
+        border-color: #6a11cb;
+        box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.25);
+    }
+
+    .sortable-header a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s;
+    }
+
+    .sortable-header a:hover {
+        color: #6a11cb;
+    }
+
+    .sort-icon {
+        margin-left: 5px;
+        font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+        .filter-bar form {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+    .chart-row {
+  display: flex; /* Enables a flex container */
+  justify-content: space-between; /* Distributes items with space between them */
+  gap: 20px; /* Optional: Adds a gap between the columns */
+  margin-bottom: 2rem;
+}
+
+.chart-column {
+  flex-basis: 50%; /* Each column takes up 50% of the container width */
+  max-width: 50%;
+}
+</style>
+    <style>
+            /* Basic styling for the filter bar to ensure visibility */
+            .filter-bar {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                padding: 1rem;
+                background-color: #f3f4f6;
+                /* A light gray background for the bar */
+                border-radius: 0.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .search-input,
+            .filter-select {
+                padding: 0.75rem;
+                border: 1px solid #d1d5db;
+                /* Lighter border color */
+                border-radius: 0.5rem;
+                background-color: #fff;
+                /* White background for inputs */
+                color: #374151;
+                /* Darker text for visibility */
+                font-size: 1rem;
+                flex-grow: 1;
+                /* Allow inputs to grow to fill space */
+            }
+
+            /* Style for the buttons */
+            .btn {
+                padding: 0.75rem 1.25rem;
+                border-radius: 0.5rem;
+                font-weight: 600;
+                text-decoration: none;
+                text-align: center;
+                transition: background-color 0.2s;
+            }
+
+            .modern-btn {
+                background-color: #4f46e5;
+                /* A vibrant button color */
+                color: #fff;
+                border: none;
+            }
+
+            .modern-btn:hover {
+                background-color: #4338ca;
+            }
+
+            .modern-btn-details {
+                background-color: #d1d5db;
+                /* Lighter button for 'Clear' */
+                color: #374151;
+                border: none;
+            }
+
+            .modern-btn-details:hover {
+                background-color: #9ca3af;
+            }
+
+            /* Ensure the form itself doesn't have styling that clashes */
+            .filter-bar form {
+                display: flex;
+                gap: 1rem;
+                width: 100%;
+            }
+        </style>
